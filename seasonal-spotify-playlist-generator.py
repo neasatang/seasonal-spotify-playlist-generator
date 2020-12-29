@@ -4,13 +4,13 @@ from spotipy.oauth2 import SpotifyOAuth
 
 def get_season(month):
     if month in ("01","11","12"):
-        return " Winter ", "❄"
+        return " Winter '", "❄"
     elif month in ("02","03","04"):
-        return " Spring ", "🌸"
+        return " Spring '", "🌸"
     elif month in ("05", "06", "07"):
-        return " Summer ", "🌞"
+        return " Summer '", "🌞"
     else:
-        return " Autumn ", "🍂"
+        return " Autumn '", "🍂"
 
 def add_to_specific_season_playlist(year, month, track):
     season = get_season(month)
@@ -19,7 +19,7 @@ def add_to_specific_season_playlist(year, month, track):
         change_year = int(year) - 1
         year = str(change_year)
 
-    playlist_name = season[1] + season[0] + year + " " + season[1]
+    playlist_name = season[0] + year[-2:] + " " + season[1]
     playlist_exists = False
     playlist_id = ""
     user_playlists = sp.current_user_playlists()
@@ -30,7 +30,7 @@ def add_to_specific_season_playlist(year, month, track):
             playlist_exists = True
 
     if playlist_exists is False:
-        newly_created_playlist = sp.user_playlist_create(os.environ["USER_ID"], playlist_name, description= "Automatically generated playlist for" + season[0] + year + season[1] + "            https://github.com/neasatang/monthly-spotify-playlist-generator" )
+        newly_created_playlist = sp.user_playlist_create(os.environ["USER_ID"], playlist_name, description= "Automatically generated playlist for" + season[0] + year[-2:] + season[1] + "            https://github.com/neasatang/monthly-spotify-playlist-generator" )
         playlist_id = newly_created_playlist["id"]
 
     sp.playlist_add_items(playlist_id, {track})
