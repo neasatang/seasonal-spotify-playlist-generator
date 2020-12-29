@@ -21,3 +21,5 @@ Some environment variables required to run the script:
 * montly-spotify-playlist-generator.py 
     * generates the playlist for all the past seasons
    
+## Bugfix
+Need to handle January i.e. Winter to be part of previous years Winter i.e. year - 1 
