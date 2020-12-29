@@ -1,5 +1,4 @@
 import os
-import datetime
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
@@ -13,8 +12,13 @@ def get_season(month):
     else:
         return " Autumn ", "🍂"
 
-def add_to_specific_month_playlist(year, month, track):
+def add_to_specific_season_playlist(year, month, track):
     season = get_season(month)
+
+    if month == "01":
+        change_year = int(year) - 1
+        year = str(change_year)
+
     playlist_name = season[1] + season[0] + year + " " + season[1]
     playlist_exists = False
     playlist_id = ""
@@ -39,21 +43,16 @@ results = sp.current_user_playlists()
 playlist = sp.playlist(os.environ["PLAYLIST_ID"])
 total = playlist["tracks"]["total"]
 offset = 0
-temp_offet = 0
+temp_offset = 0
+
 while offset != total:
     playlist_tracks = sp.playlist_items(os.environ["PLAYLIST_ID"], offset=offset)
     for item in playlist_tracks["items"]:
         date = item["added_at"].split("-")
-        now = datetime.datetime.now()
-        current_month = str(now.month)
-        if len(current_month) < 2:
-            current_month = "0" + current_month
-
-        if str(now.year) == date[0] and current_month == date[1]:
-            if item["track"] is not None:
-                track_id = item["track"]["id"]
-                if track_id is not None:
-                    add_to_specific_month_playlist(date[0], date[1], track_id)
-                    new_track_id = sp.track(track_id)
-        temp_offet += 1
-    offset = temp_offet
+        if item["track"] is not None:
+            track_id = item["track"]["id"]
+            if track_id is not None:
+                add_to_specific_season_playlist(date[0], date[1], track_id)
+                new_track_id = sp.track(track_id)
+        temp_offset += 1
+    offset = temp_offset
