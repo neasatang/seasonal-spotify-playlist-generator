@@ -20,8 +20,4 @@ Some environment variables required to run the script:
     * generates the playlist for the last season
 * montly-spotify-playlist-generator.py 
     * generates the playlist for all the past seasons
-    
-    
-## Bugfix:
-* Need to change the `most-recent-montly-spotify-playlist-generator.py` so that it gets the current season rather than month/year (generating it on a monthly basis was the initial idea but i changed to using seasons instead and forgot to change it during implementation) 
-* Need to rename files to use the word `seasonal` instead of `monthly`
+   
