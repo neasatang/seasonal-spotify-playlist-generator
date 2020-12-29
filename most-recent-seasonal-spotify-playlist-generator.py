@@ -16,11 +16,11 @@ seasons = {
 }
 
 def get_season(month):
-    if month in winter_months:
+    if month in ("01","11","12"):
         return " Winter ", "❄"
-    elif month in spring_months:
+    elif month in ("02","03","04"):
         return " Spring ", "🌸"
-    elif month in summer_months:
+    elif month in ("05", "06", "07"):
         return " Summer ", "🌞"
     else:
         return " Autumn ", "🍂"
