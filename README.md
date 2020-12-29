@@ -1,6 +1,7 @@
 # monthly-spotify-playlist-generator
 
 Generates seasonal playlists that you may want to create from a big playlist that you have over the years
+<img src="image.png" width="=250">
 
 Some environment variables required to run the script:
 | Key                   | Val                            | 
